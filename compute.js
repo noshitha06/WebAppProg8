@@ -24,17 +24,26 @@ const server =
           // Process the queries here
           res.statusCode = 200      //code for OK
           res.setHeader('Content-Type', 'text/plain') 
-          res.write("You rang?")
-          res.end();
-        
-      } else {
+          if (req.method === 'GET' ) {
+          const x = Number(search_params.get('x'))
+          const y = Number(search_params.get('y'))
+
+          const fx = Math.atan(x)
+          const fy = Math.atan(y)
+
+          res.statusCode = 200      //code for OK
+          res.setHeader('Content-Type', 'text/plain')
+          res.end(`atan(${x}) is ${fx} and atan(${y}) is ${fy}`);
+          
+          } else {
         console.log("Status 404")
         res.statusCode = 404;
         res.end();
+          }
       }
 
     }                           
-)
+  )
 
 server.listen(port, hostname, () => {   //Start the server
   console.log(`Server running at http://${hostname}:${port}/`)  //Log the start
