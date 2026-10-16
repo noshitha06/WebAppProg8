@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch Request</title>
+</head>
+<body>
+  <h1>Noshitha uses a fetch request</h1>
+
+  <input type="number" id="x" placeholder="x">
+  <input type="number" id="y" placeholder="y">
+  <button id="compute">Invoke computation on Server</button>
+
+  <div id="target"></div>
+
+  <script>
+    document.getElementById('compute').addEventListener('click', () => {
+      
+      const x = document.getElementById('x').value
+      const y = document.getElementById('y').value
+
+      
+      const url = `http://127.0.0.1:3001/?x=${x}&y=${y}`
+
+     
+      fetch(url)
+        .then((resp) => { return resp.text() })
+        .then((text) => {
+          document.getElementById('target').innerHTML = text
+        })
+        
+        .catch((error) => {
+          document.getElementById('target').innerHTML = 'Error: ' + error
+        })
+    })
+  </script>
+</body>
+</html>
